@@ -106,6 +106,7 @@ class CriaIndices extends genericArquivo {
      * 
      */
     private function criaVetorIndice($row, $controlaLinha) {
+        set_time_limit(0);
         $id = $this->buscaId($row, genericArquivo::INFORMACAO_PESQUISADA['developerId']);
 
         if (!empty($id)) {    
@@ -123,6 +124,7 @@ class CriaIndices extends genericArquivo {
      * Responsavel por criar a arvore de indices
      */
     private function criaArvoreIndice($row, $controlaLinha) {
+        set_time_limit(0);
         $email = $this->buscaId($row, genericArquivo::INFORMACAO_PESQUISADA['developerEmail']);
         if (!empty($email)) {    
             $email = $this->montaIndiceArvore($email, $controlaLinha);
@@ -132,14 +134,17 @@ class CriaIndices extends genericArquivo {
 
 
     private function montaIndice($id, $linha) {
+        set_time_limit(0);
         return $id . ';' . $linha . '\n';
     }
 
     private function montaIndiceArvore($id, $linha) {
+        set_time_limit(0);
         return $id . ';' . $linha;
     } 
 
     public function ajustaTamanho($row, $tamanhoCampo) {
+        set_time_limit(0);
         return str_pad($row, $tamanhoCampo, ' ');
     }
 
@@ -160,6 +165,7 @@ class CriaIndices extends genericArquivo {
 
     private function height($node)
     {
+        set_time_limit(0);
         if ($node == null) {
             return 0;
         }
@@ -168,11 +174,13 @@ class CriaIndices extends genericArquivo {
 
     private function updateHeight($node)
     {
+        set_time_limit(0);
         $node->height = 1 + max($this->height($node->left), $this->height($node->right));
     }
 
     private function balanceFactor($node)
     {
+        set_time_limit(0);
         if ($node == null) {
             return 0;
         }
@@ -181,6 +189,7 @@ class CriaIndices extends genericArquivo {
 
     private function rightRotate($y)
     {
+        set_time_limit(0);
         $x = $y->left;
         $T = $x->right;
 
@@ -195,6 +204,7 @@ class CriaIndices extends genericArquivo {
 
     private function leftRotate($x)
     {
+        set_time_limit(0);
         $y = $x->right;
         $T = $y->left;
 
@@ -209,6 +219,7 @@ class CriaIndices extends genericArquivo {
 
     public function insert($root, $data)
     {
+        set_time_limit(0);
         if ($root == null) {
             return new Node($data);
         }

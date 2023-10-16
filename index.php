@@ -29,12 +29,22 @@
         <input type="text" id="textoArquivoID" name="textoArquivoID">
         <input type="submit" name="arquivoID" value="buscar">
     </form>
+    </br>
+    <form method="post">
+        <input type="submit" name="aplicativosGratis" value="listar aplicativos gratis">
+    </form>
+    </br>
+    <form method="post">
+        <input type="submit" name="aplicativosAvaliados" value="listar aplicativos mais avaliados">
+    </form>
+    </br>
 
 </br> 
 </body>
 </html>
 <?php
 session_start();
+ini_set('memory_limit', '4096M');
 require_once('criaIndices.php');
 require_once('manipulaIndices.php');
 
@@ -46,18 +56,28 @@ if (isset($_POST['vetorIndice'])) {
     return;
 }
 
-if  (isset($_POST['arquivoNome'])) {
+if (isset($_POST['arquivoNome'])) {
     echo $pesquisa->pesquisaIndicePorNome($_POST['textoArquivoNome']);
     return;
 }
 
-if  (isset($_POST['arquivoID'])) {
+if (isset($_POST['arquivoID'])) {
     echo $pesquisa->pesquisaIndicePorId($_POST['textoArquivoID']);
     return;
 }
 
-if  (isset($_POST['arvoreIndice'])) {
+if (isset($_POST['arvoreIndice'])) {
     echo $pesquisa->pesquisaIndiceArvore($_POST['textoArvoreIndice']);
+    return;
+}
+
+if (isset($_POST['aplicativosGratis'])) {
+    $pesquisa->listaAplicativosGratuitos(20000);
+    return;
+}
+
+if (isset($_POST['aplicativosAvaliados'])) {
+    $pesquisa->listaAplicativosMaisAvaliados(20000);
     return;
 }
 

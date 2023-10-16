@@ -8,7 +8,9 @@ class genericArquivo {
         'id' => 1,
         'nome' => 0,
         'developerId' => 13,
-        'developerEmail' => 15
+        'developerEmail' => 15,
+        'free' => 8,
+        'RatingCount' => 4
     ];
 
     public const TAMANHO_DA_STRING = [

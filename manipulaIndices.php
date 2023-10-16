@@ -163,5 +163,60 @@ public function limpaData($row, $posicaoRetornada) {
     return $row[$posicaoRetornada];
 }
 
+public function listaAplicativosGratuitos($control) {
+    $handle = fopen("dadosBinario.bin","r");
+    $controlaLinha = 0;
+    $i = 0;
+    if ($handle) {
+        while (!feof($handle)) {
+            $i++;
+            set_time_limit(0);
+            fseek($handle, $controlaLinha);
+            $row = fgets($handle, 11856); 
+            $row = $this->binaryToString($row);
+
+            $free = $this->buscaId($row, genericArquivo::INFORMACAO_PESQUISADA['free']);
+            if ($free == 'True') {
+                echo $row . '<br><br>';
+            }
+
+            if ($i == ($control)) {
+                return;
+            }
+
+            $controlaLinha += 11856;
+        }
+    }
+}
+
+public function listaAplicativosMaisAvaliados($control) {
+    $handle = fopen("dadosBinario.bin","r");
+    $controlaLinha = 0;
+    $i = 0;
+
+    if ($handle) {
+        while (!feof($handle)) {
+            set_time_limit(0);
+            $i++;
+            fseek($handle, $controlaLinha);
+            $row = fgets($handle, 11856); 
+            $row = $this->binaryToString($row);
+
+            $price = $this->buscaId($row, genericArquivo::INFORMACAO_PESQUISADA['RatingCount']);
+
+            if ((int) $price >= 2000) {
+                echo $row . '<br><br>';
+            }
+
+            if ($i == $control) {
+                return;
+            }
+
+
+            $controlaLinha += 11856;
+        }
+    }
+}
+
 
 }
